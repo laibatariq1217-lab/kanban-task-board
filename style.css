@@ -1,0 +1,126 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f5f7;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#openModalBtn {
+    background-color: #0052cc;
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Modal Popup Styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 8% auto;
+    padding: 25px;
+    border-radius: 8px;
+    width: 400px;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.close-btn {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 22px;
+    cursor: pointer;
+    color: #888;
+}
+
+.modal-content input, 
+.modal-content textarea, 
+.modal-content select {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 12px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.submit-btn {
+    width: 100%;
+    background-color: #0052cc;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Board Layout */
+.board {
+    display: flex;
+    gap: 20px;
+}
+
+.column {
+    background: #ebecf0;
+    flex: 1;
+    padding: 15px;
+    border-radius: 8px;
+    min-height: 450px;
+}
+
+.task-list {
+    min-height: 380px;
+}
+
+.task-card {
+    background: white;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    cursor: grab;
+}
+
+.tag {
+    font-size: 11px;
+    font-weight: bold;
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.High { background-color: #e74c3c; }
+.Medium { background-color: #f39c12; }
+.Low { background-color: #2ecc71; }
+input[type="date"] {
+    cursor: pointer;
+}

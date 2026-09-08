@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interactive Kanban Task Board</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="header">
+        <h2>Kanban Task Board</h2>
+        <button id="openModalBtn" onclick="openModal()">+ Add New Task</button>
+    </div>
+
+    <!-- Modal Form (Pop-up) -->
+    <div id="taskModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h3>Create New Task</h3>
+            <input type="text" id="title" placeholder="Task Title" required>
+            <textarea id="desc" placeholder="Task Description"></textarea>
+            
+            <label for="priority">Priority Tag:</label>
+            <select id="priority">
+                <option value="Low">Low Priority</option>
+                <option value="Medium">Medium Priority</option>
+                <option value="High">High Priority</option>
+            </select>
+            
+            <label for="dueDate">Due Date:</label>
+<input type="date" id="dueDate" onclick="this.showPicker()"> 
+            
+            <button class="submit-btn" onclick="addTask()">Save Task</button>
+        </div>
+    </div>
+
+    <!-- Multi-Column Layout -->
+    <div class="board">
+        <div class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h3>To Do</h3>
+            <div class="task-list" id="todo-list"></div>
+        </div>
+
+        <div class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h3>In Progress</h3>
+            <div class="task-list" id="inprogress-list"></div>
+        </div>
+
+        <div class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h3>Completed</h3>
+            <div class="task-list" id="completed-list"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

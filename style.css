@@ -1,126 +1,126 @@
 * {
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
 body {
-    font-family: Arial, sans-serif;
     background-color: #f4f5f7;
     padding: 20px;
 }
 
-.header {
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
 
-#openModalBtn {
+.actions button {
     background-color: #0052cc;
     color: white;
-    padding: 10px 16px;
     border: none;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 4px;
     cursor: pointer;
+    font-weight: bold;
+    margin-left: 10px;
 }
 
-/* Modal Popup Styling */
+.board {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    align-items: flex-start;
+}
+
+.column {
+    background-color: #ebecf0;
+    width: 280px;
+    min-width: 280px;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.column h3 {
+    margin-bottom: 12px;
+    font-size: 16px;
+    color: #172b4d;
+}
+
+.cards-container {
+    min-height: 100px;
+}
+
+.card {
+    background: white;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    cursor: grab;
+    position: relative;
+}
+
+.card h4, .card p {
+    outline: none;
+    margin-bottom: 5px;
+}
+
+.card h4[contenteditable="true"]:focus, 
+.card p[contenteditable="true"]:focus {
+    background-color: #fffbc8;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    color: #ff4d4f;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Modal Styling */
 .modal {
     display: none;
     position: fixed;
-    z-index: 100;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
 }
 
 .modal-content {
-    background-color: white;
-    margin: 8% auto;
-    padding: 25px;
+    background: white;
+    padding: 20px;
     border-radius: 8px;
-    width: 400px;
+    width: 300px;
     position: relative;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
-.close-btn {
-    position: absolute;
-    right: 15px;
-    top: 10px;
-    font-size: 22px;
-    cursor: pointer;
-    color: #888;
-}
-
-.modal-content input, 
-.modal-content textarea, 
-.modal-content select {
+.modal-content input, .modal-content textarea {
     width: 100%;
-    margin-top: 5px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
-.submit-btn {
+.modal-content button {
     width: 100%;
-    background-color: #0052cc;
+    background: #0052cc;
     color: white;
-    padding: 10px;
     border: none;
-    border-radius: 4px;
-    font-weight: bold;
+    padding: 8px;
     cursor: pointer;
 }
 
-/* Board Layout */
-.board {
-    display: flex;
-    gap: 20px;
-}
-
-.column {
-    background: #ebecf0;
-    flex: 1;
-    padding: 15px;
-    border-radius: 8px;
-    min-height: 450px;
-}
-
-.task-list {
-    min-height: 380px;
-}
-
-.task-card {
-    background: white;
-    padding: 12px;
-    margin-top: 10px;
-    border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-    cursor: grab;
-}
-
-.tag {
-    font-size: 11px;
-    font-weight: bold;
-    color: #fff;
-    padding: 3px 8px;
-    border-radius: 3px;
-    display: inline-block;
-    margin-top: 5px;
-}
-
-.High { background-color: #e74c3c; }
-.Medium { background-color: #f39c12; }
-.Low { background-color: #2ecc71; }
-input[type="date"] {
+.close {
+    position: absolute;
+    top: 8px; right: 12px;
     cursor: pointer;
+    font-size: 18px;
 }

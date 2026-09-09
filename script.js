@@ -1,67 +1,79 @@
-let taskIdCounter = 0;
+let draggedCard = null;
 
 function openModal() {
-    document.getElementById('taskModal').style.display = 'block';
+    document.getElementById('taskModal').style.display = 'flex';
 }
 
 function closeModal() {
     document.getElementById('taskModal').style.display = 'none';
 }
 
-function addTask() {
-    const title = document.getElementById('title').value;
-    const desc = document.getElementById('desc').value;
-    const priority = document.getElementById('priority').value;
-    const dueDate = document.getElementById('dueDate').value;
+function createTask() {
+    const title = document.getElementById('taskTitle').value;
+    const desc = document.getElementById('taskDesc').value;
 
-    if (!title) {
-        alert("Please enter a task title!");
-        return;
-    }
+    if (!title) return alert("Please enter a title");
 
-    taskIdCounter++;
     const card = document.createElement('div');
-    card.className = 'task-card';
-    card.id = 'task-' + taskIdCounter;
+    card.className = 'card';
     card.draggable = true;
     card.ondragstart = drag;
 
     card.innerHTML = `
-        <h4>${title}</h4>
-        <p>${desc}</p>
-        <span class="tag ${priority}">${priority}</span>
-        <p><small style="color: #666; display: block; margin-top: 5px;">Due: ${dueDate || 'No Date'}</small></p>
+        <span class="delete-btn" onclick="this.parentElement.remove()">&times;</span>
+        <h4 contenteditable="true" title="Click to edit">${title}</h4>
+        <p contenteditable="true" title="Click to edit">${desc || 'No description'}</p>
     `;
 
-    document.getElementById('todo-list').appendChild(card);
+    // Default: Pehle column (Incompleted) mein add ho
+    const firstColumn = document.querySelector('.cards-container');
+    firstColumn.appendChild(card);
 
-    // Form clear aur modal close
-    document.getElementById('title').value = '';
-    document.getElementById('desc').value = '';
+    document.getElementById('taskTitle').value = '';
+    document.getElementById('taskDesc').value = '';
     closeModal();
 }
 
-// Drag and Drop Logic
-function allowDrop(event) {
-    event.preventDefault();
+// Drag & Drop Functions
+function allowDrop(e) {
+    e.preventDefault();
 }
 
-function drag(event) {
-    event.dataTransfer.setData("text", event.target.id);
+function drag(e) {
+    draggedCard = e.target;
 }
 
-function drop(event) {
-    event.preventDefault();
-    const data = event.dataTransfer.getData("text");
-    const draggedElement = document.getElementById(data);
+function drop(e) {
+    e.preventDefault();
+    let target = e.target;
     
-    // Nearest task-list target dhundna
-    let targetList = event.target;
-    if (!targetList.classList.contains('task-list')) {
-        targetList = targetList.closest('.column').querySelector('.task-list');
+    // Tarja: Ensure targeting .cards-container or .column
+    if (target.classList.contains('card')) {
+        target = target.parentElement;
+    } else if (target.classList.contains('column')) {
+        target = target.querySelector('.cards-container');
     }
     
-    if (targetList) {
-        targetList.appendChild(draggedElement);
+    if (target && target.classList.contains('cards-container')) {
+        target.appendChild(draggedCard);
     }
+}
+
+// Add Dynamic List/Column
+function addNewList() {
+    const listName = prompt("Enter List Name:", "New Stage");
+    if (!listName) return;
+
+    const board = document.getElementById('board');
+    const newCol = document.createElement('div');
+    newCol.className = 'column';
+    newCol.ondragover = allowDrop;
+    newCol.ondrop = drop;
+
+    newCol.innerHTML = `
+        <h3 contenteditable="true">${listName}</h3>
+        <div class="cards-container"></div>
+    `;
+
+    board.appendChild(newCol);
 }
